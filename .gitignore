@@ -1,0 +1,25 @@
+# VS & .NET
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.userprefs
+*.cache
+*.csproj.user
+project.lock.json
+
+# Build output
+**/bin/
+**/obj/
+
+# Logs
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Node / frontend (just in case)
+node_modules/
+dist/
