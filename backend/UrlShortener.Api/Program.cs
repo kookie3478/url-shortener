@@ -6,7 +6,7 @@ using UrlShortener.Api.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Read DATABASE_URL from environment (Supabase)
-var connString = Environment.GetEnvironmentVariable("DATABASE_URL") // db.hqydxyctqgtmgxszquel.supabase.co
+var connString = Environment.GetEnvironmentVariable("DATABASE_URL") 
                  ?? builder.Configuration.GetConnectionString("DefaultConnection");
 
 // Register services
