@@ -35,6 +35,7 @@ app.UseCors("AllowAll");
 // ----------------------
 
 // CREATE SHORT URL
+// CREATE SHORT URL
 app.MapPost("/api/shorten",
 async (CreateRequest req, HttpContext ctx, AppDbContext db, QrService qr, ShortcodeService codeGen) =>
 {
@@ -63,10 +64,15 @@ async (CreateRequest req, HttpContext ctx, AppDbContext db, QrService qr, Shortc
             : null
     };
 
+    // ---- FIX: Use environment BASE_URL instead of localhost ----
+    var envBase = Environment.GetEnvironmentVariable("BASE_URL");
+    var baseUrl = !string.IsNullOrWhiteSpace(envBase)
+                    ? envBase.TrimEnd('/')
+                    : $"{ctx.Request.Scheme}://{ctx.Request.Host}";
+
     // If QR requested
     if (req.GenerateQr)
     {
-        string baseUrl = req.BaseUrl ?? $"{ctx.Request.Scheme}://{ctx.Request.Host}";
         entry.QrBase64 = qr.GenerateQr($"{baseUrl}/{shortcode}");
     }
 
@@ -74,8 +80,9 @@ async (CreateRequest req, HttpContext ctx, AppDbContext db, QrService qr, Shortc
     db.Urls.Add(entry);
     await db.SaveChangesAsync();
 
-    // Return response
-    var responseUrl = $"{ctx.Request.Scheme}://{ctx.Request.Host}/{shortcode}";
+    // ---- FIXED shortUrl ----
+    var responseUrl = $"{baseUrl}/{shortcode}";
+
     return Results.Ok(new
     {
         shortUrl = responseUrl,

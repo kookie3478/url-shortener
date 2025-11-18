@@ -24,11 +24,14 @@ document.getElementById("generateBtn").addEventListener("click", async () => {
       baseUrl: null,
     };
 
-    const response = await fetch("http://localhost:5114/api/shorten", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
+    const response = await fetch(
+      "https://short-it-rvc9.onrender.com/api/shorten",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      }
+    );
 
     const data = await response.json();
     const output = document.getElementById("output");
