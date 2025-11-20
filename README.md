@@ -161,10 +161,17 @@ Redirects user to original URL and logs click.
 🌟 Future Improvements
 
 🧑‍💼 User authentication + personal dashboard
+
 📊 Analytics UI page (graphs, device stats)
+
 🔐 Password-protected URLs
+
 🧪 Custom domain support
+
 📦 Bulk URL creation
+
 🤖 AI link categorizer
+
 🗑 Auto-delete expired links
+
 📈 Live analytics (WebSockets or Supabase Realtime)
